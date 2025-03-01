@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  geolocator: ^9.0.2
+  geolocator: ^13.0.2
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -48,8 +48,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
-  flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.0.6
+  flutter_launcher_icons: ^0.14.3
+  # flutter_native_splash: ^2.4.5  # Add this line
 
 
 # For information on the generic Dart part of this file, see the
@@ -66,6 +66,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/splash.png
     
 
 flutter_launcher_icons:
@@ -76,8 +77,8 @@ flutter_launcher_icons:
 #  adaptive_icon_background: "assets/background.png"
   min_sdk_android: 21
 
-flutter_native_splash:
-  color: "#ffffff"
-  image: assets/splash.png
-  android: true
-  ios: true
+# flutter_native_splash:
+#   color: "#676BD0"  # Set the background color of the splash screen
+#   image: assets/splash.png  # Path to your splash screen image
+#   android: true
+#   ios: true

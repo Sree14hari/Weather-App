@@ -1,31 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:weather_app/screens/home.dart'; // Assuming you have a HomeScreen
+import 'package:weather_app/screens/home.dart';
 
-class SplashScreen extends StatelessWidget {
-  final PermissionStatus? permissionStatus;
+class SplashScreen extends StatefulWidget {
+  final PermissionStatus permissionStatus;
 
   const SplashScreen({super.key, required this.permissionStatus});
 
   @override
-  Widget build(BuildContext context) {
-    // Check the permission status and navigate accordingly
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (permissionStatus != null && permissionStatus!.isGranted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => WeatherHome()),
-        );
-      } else {
-        // Handle the case where permission is denied
-        // Show a message or navigate to a different screen
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Location permission is required to use this app.'),
-          ),
-        );
-      }
-    });
+  _SplashScreenState createState() => _SplashScreenState();
+}
 
-    return Scaffold(body: Center(child: CircularProgressIndicator()));
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _navigateToHome();
+  }
+
+  _navigateToHome() async {
+    await Future.delayed(Duration(seconds: 3));
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => WeatherHome()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF676BD0),
+      body: Center(
+        child: Image.asset('assets/splash.png'), // Display the splash image
+      ),
+    );
   }
 }

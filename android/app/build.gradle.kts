@@ -42,3 +42,8 @@ android {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    implementation("androidx.appcompat:appcompat:1.3.1")  // Correct syntax for Kotlin DSL
+    // Other dependencies...
+}
