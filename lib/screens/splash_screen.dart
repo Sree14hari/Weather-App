@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:weather_app/screens/home.dart';
+import 'package:weather_app/screens/weatherhome.dart';
 
 class SplashScreen extends StatefulWidget {
   final PermissionStatus permissionStatus;
@@ -15,10 +15,31 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _navigateToHome();
+    _checkPermissionsAndNavigate();
+  }
+
+  _checkPermissionsAndNavigate() async {
+    print('Checking permissions...');
+    if (await _requestPermissions()) {
+      print('Permissions granted, navigating to home...');
+      _navigateToHome();
+    } else {
+      // Handle permission denied scenario
+      print('Required permissions denied');
+    }
+  }
+
+  Future<bool> _requestPermissions() async {
+    Map<Permission, PermissionStatus> statuses =
+        await [Permission.location, Permission.locationWhenInUse].request();
+
+    bool allGranted = statuses.values.every((status) => status.isGranted);
+    print('Permissions status: $statuses');
+    return allGranted;
   }
 
   _navigateToHome() async {
+    print('Navigating to home screen...');
     await Future.delayed(Duration(seconds: 3));
     Navigator.pushReplacement(
       context,
